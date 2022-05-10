@@ -35,6 +35,11 @@ public class NthRoot {
         if (theNumberToGetRootOf.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
         }
+
+        if (theRootToFind <= 0) {
+            throw new IllegalArgumentException("can only find positive roots of numbers ");
+        }
+
         BigDecimal xPrev = theNumberToGetRootOf;
         BigDecimal x = theNumberToGetRootOf.divide(new BigDecimal(theRootToFind), SCALE, ROUNDING_MODE);  // starting "guessed" value...
         while (x.subtract(xPrev).abs().compareTo(p) > 0) {

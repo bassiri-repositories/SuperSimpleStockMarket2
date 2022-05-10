@@ -16,4 +16,13 @@ public class NthRootTest {
         Assertions.assertEquals(NthRoot.nthRoot(7, BigDecimal.valueOf(125879645)), new BigDecimal("14.3594068718"));
     }
 
-}
+    @Test
+    public void testNthRootZero() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            NthRoot.nthRoot(0, BigDecimal.valueOf(125879645));
+        }, "java.lang.IllegalArgumentException: can only find positive roots of numbers");
+
+    }
+
+
+    }
