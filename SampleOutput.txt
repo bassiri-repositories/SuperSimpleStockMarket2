@@ -1,0 +1,16 @@
+Sample output from SuperSimpleStockMarketTest.processTradeStockNotInReferenceData()
+    -All trades are within the 15-minute window
+    -Stock symbol COF is ignored because it is not in the reference data
+    -The processed trades are printed with Stock symbol, Quantity, Buy/Sell, price, Dividend Yield, P/E ratio, and timestamp
+    -The unprocessed trades are printed with Stock symbol, Quantity, Buy/Sell, and price
+    -The volume weighted stock price and Geometric Mean factor in all the processed trades
+
+Stock Symbol: COF, is not in the reference data. Ignoring this trade.
+Processed Trades:
+	Stock Symbol: POP, Quantity: 15, Buy/Sell: BUY, Price: 1, Dividend Yield: 8.0000000000, P/E ratio: 0.1250000000, Trade timestamp 2022-05-10T11:16:14.707538700Z
+	Stock Symbol: ALE, Quantity: 7, Buy/Sell: BUY, Price: 5, Dividend Yield: 4.6000000000, P/E ratio: 0.2173913043, Trade timestamp 2022-05-10T11:16:14.707538700Z
+	Stock Symbol: GIN, Quantity: 1, Buy/Sell: SELL, Price: 25, Dividend Yield: 0.0800000000, P/E ratio: 3.1250000000, Trade timestamp 2022-05-10T11:16:14.707538700Z
+Unprocessed Trades:
+	Stock Symbol: COF, Quantity: 1, Buy/Sell: SELL, Price: 25
+Volume Weighted Stock Price: 3.2608695652
+Geometric Mean: 5.0000000000
