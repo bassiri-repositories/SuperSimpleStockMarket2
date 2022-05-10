@@ -17,25 +17,31 @@ public class SuperSimpleStockMarketTest {
     @Test
     public void testAllWithinLookbackTime() {
         runTheTest(15, ChronoUnit.MINUTES, 0,
-                new BigDecimal("3.2608695652"), new BigDecimal("5.0000000000"));
+                new BigDecimal("3.2608695652"), new BigDecimal("5.0000000000"), giveMeListOfTrades());
     }
 
     @Test
     public void testNoneWithinLookbackTime()  {
         runTheTest(15, ChronoUnit.SECONDS, 10000,
-                new BigDecimal("0"), new BigDecimal("5.0000000000"));
+                new BigDecimal("0"), new BigDecimal("5.0000000000"), giveMeListOfTrades());
     }
 
     @Test
     public void testSomeWithinLookbackTime()  {
         runTheTest(35, ChronoUnit.SECONDS, 10000,
-                new BigDecimal("7.5000000000"), new BigDecimal("5.0000000000"));
+                new BigDecimal("7.5000000000"), new BigDecimal("5.0000000000"), giveMeListOfTrades());
+    }
+    @Test
+    public void testWithZeroPrice() {
+        runTheTest(15, ChronoUnit.MINUTES, 0,
+                new BigDecimal("1.7391304348"), new BigDecimal("0"), giveMeListOfTradesWithZeroPrice());
     }
 
+
     private void runTheTest(int lookbackTime, ChronoUnit chronoUnit, int sleepTime,
-                            BigDecimal expectedWeightedStockPrice, BigDecimal expectedGeometricMean) {
+                            BigDecimal expectedWeightedStockPrice, BigDecimal expectedGeometricMean, List<Trade> trades) {
         SuperSimpleStockMarket superSimpleStockMarket = new SuperSimpleStockMarket(lookbackTime, chronoUnit);
-        processTrades(superSimpleStockMarket, giveMeListOfTrades(), sleepTime);
+        processTrades(superSimpleStockMarket, trades, sleepTime);
         superSimpleStockMarket.printTrades();
         BigDecimal weightedStockPrice = superSimpleStockMarket.calculateVolumeWeightedStockPrice();
         BigDecimal geometricMean = superSimpleStockMarket.calculateGeometricMean();
@@ -66,4 +72,15 @@ public class SuperSimpleStockMarketTest {
                 new Trade("COF", BigDecimal.valueOf(25), 1, BuySell.SELL)
         );
     }
+
+    private List<Trade> giveMeListOfTradesWithZeroPrice() {
+        return List.of(
+                new Trade("POP", BigDecimal.valueOf(1), 15, BuySell.BUY),
+                new Trade("ALE", BigDecimal.valueOf(0), 7, BuySell.BUY),
+                new Trade("GIN", BigDecimal.valueOf(25), 1, BuySell.SELL),
+                new Trade("COF", BigDecimal.valueOf(25), 1, BuySell.SELL)
+        );
+    }
+
+
 }
