@@ -43,4 +43,20 @@ public class TradeTest {
         Assertions.assertEquals(new BigDecimal("0.0320000000"), trade.getDividendYield());
         Assertions.assertEquals(new BigDecimal("31.2500000000"), trade.getPeRatio());
     }
+    @Test
+    public void processZeroDividend() {
+
+        Trade trade = new Trade("TEA", BigDecimal.valueOf(25), 1, BuySell.SELL);
+        boolean processed = trade.processTrade();
+        Stock stock = trade.getStock();
+
+        Assertions.assertTrue(processed);
+        Assertions.assertEquals(stock.getStockType(), StockType.COMMON);
+        Assertions.assertEquals(stock.getLastDividend(), new BigDecimal("0"));
+        Assertions.assertEquals(stock.getParValue(), new BigDecimal("100"));
+        Assertions.assertEquals(trade.getPrice(), new BigDecimal("25"));
+        Assertions.assertEquals(new BigDecimal("0.0000000000"), trade.getDividendYield());
+        Assertions.assertEquals(BigDecimal.ZERO, trade.getPeRatio());
+
+    }
 }

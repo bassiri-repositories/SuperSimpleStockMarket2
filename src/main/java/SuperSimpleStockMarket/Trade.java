@@ -58,15 +58,15 @@ public class Trade {
 
     private BigDecimal calculateDividendYield() {
         if(stock.getStockType() == StockType.COMMON) {
-            return stock.getLastDividend().divide(price, 10, RoundingMode.HALF_DOWN);
+            return price.equals(BigDecimal.ZERO) ? BigDecimal.ZERO : stock.getLastDividend().divide(price, 10, RoundingMode.HALF_DOWN);
         }
         else {
-            return stock.getFixedDividend().multiply(stock.getParValue()).divide(price, 10, RoundingMode.HALF_DOWN);
+            return price.equals(BigDecimal.ZERO) ? BigDecimal.ZERO : stock.getFixedDividend().multiply(stock.getParValue()).divide(price, 10, RoundingMode.HALF_DOWN);
         }
     }
 
     private BigDecimal calculatePeRatio() {
-        return price.divide(stock.getLastDividend(), 10, RoundingMode.HALF_DOWN);
+        return stock.getLastDividend().equals(BigDecimal.ZERO) ? BigDecimal.ZERO : price.divide(stock.getLastDividend(), 10, RoundingMode.HALF_DOWN);
     }
 
     public String reportTrade() {
