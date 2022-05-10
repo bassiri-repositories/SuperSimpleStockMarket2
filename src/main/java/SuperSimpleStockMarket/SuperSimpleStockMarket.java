@@ -9,9 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import SimpleStockMath.NthRoot;
-import lombok.extern.java.Log;
 
-@Log
 public class SuperSimpleStockMarket {
     private final int lookbackTime;
     private final ChronoUnit chronoUnit;
