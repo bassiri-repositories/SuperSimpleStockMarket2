@@ -52,6 +52,9 @@ public class SuperSimpleStockMarket {
 
     public BigDecimal calculateGeometricMean() {
         synchronized (processedTrades) {
+            if(processedTrades.isEmpty()) {
+                return BigDecimal.ZERO;
+            }
             BigDecimal productOfPrices = processedTrades.stream().map(Trade::getPrice).toList().stream().reduce(BigDecimal.ONE, BigDecimal::multiply);
             BigDecimal geometricMean = NthRoot.nthRoot(processedTrades.size(), productOfPrices);
             System.out.println("Geometric Mean: " + geometricMean.toPlainString());

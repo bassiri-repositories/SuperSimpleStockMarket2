@@ -37,6 +37,12 @@ public class SuperSimpleStockMarketTest {
                 new BigDecimal("1.7391304348"), new BigDecimal("0"), giveMeListOfTradesWithZeroPrice());
     }
 
+    @Test
+    public void testWithNoTrades() {
+        runTheTest(15, ChronoUnit.MINUTES, 0,
+                new BigDecimal("0"), new BigDecimal("0"), List.of());
+    }
+
 
     private void runTheTest(int lookbackTime, ChronoUnit chronoUnit, int sleepTime,
                             BigDecimal expectedWeightedStockPrice, BigDecimal expectedGeometricMean, List<Trade> trades) {
